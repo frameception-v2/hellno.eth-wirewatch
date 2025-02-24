@@ -53,7 +53,7 @@ export default function Frame() {
       setContext(context);
       
       // Automatically redirect to website
-      sdk.actions.openUrl("https://wirewatch.xyz");
+      sdk.actions.openUrl("https://corporate.watch");
 
       console.log("Calling ready");
       sdk.actions.ready({});
