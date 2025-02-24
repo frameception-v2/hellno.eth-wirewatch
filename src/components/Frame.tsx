@@ -55,30 +55,6 @@ export default function Frame() {
       // Automatically redirect to website
       sdk.actions.openUrl("https://wirewatch.xyz");
 
-      sdk.on("frameAdded", ({ notificationDetails }) => {
-        setAdded(true);
-      });
-
-      sdk.on("frameAddRejected", ({ reason }) => {
-        console.log("frameAddRejected", reason);
-      });
-
-      sdk.on("frameRemoved", () => {
-        console.log("frameRemoved");
-        setAdded(false);
-      });
-
-      sdk.on("notificationsEnabled", ({ notificationDetails }) => {
-        console.log("notificationsEnabled", notificationDetails);
-      });
-      sdk.on("notificationsDisabled", () => {
-        console.log("notificationsDisabled");
-      });
-
-      sdk.on("primaryButtonClicked", () => {
-        console.log("primaryButtonClicked");
-      });
-
       console.log("Calling ready");
       sdk.actions.ready({});
 
@@ -88,9 +64,9 @@ export default function Frame() {
       // Subscribe to the MIPD Store.
       store.subscribe((providerDetails) => {
         console.log("PROVIDER DETAILS", providerDetails);
-        // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
       });
     };
+
     if (sdk && !isSDKLoaded) {
       console.log("Calling load");
       setIsSDKLoaded(true);
@@ -99,7 +75,7 @@ export default function Frame() {
         sdk.removeAllListeners();
       };
     }
-  }, [isSDKLoaded, addFrame]);
+  }, [isSDKLoaded]);
 
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
