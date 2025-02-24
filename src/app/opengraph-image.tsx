@@ -92,8 +92,8 @@ export default async function Image() {
 
   const options = await initializeFonts();
 
-  const BACKGROUND_GRADIENT_START = "#c026d3";
-  const BACKGROUND_GRADIENT_END = "#ef4444";
+  const BACKGROUND_GRADIENT_START = "#0f172a";  // Dark blue
+  const BACKGROUND_GRADIENT_END = "#3b82f6";    // Bright blue
   const BACKGROUND_GRADIENT_STYLE = {
     backgroundImage: `linear-gradient(to bottom, ${BACKGROUND_GRADIENT_START}, ${BACKGROUND_GRADIENT_END})`,
     color: "white",
