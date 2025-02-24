@@ -42,25 +42,6 @@ export default function Frame() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [context, setContext] = useState<Context.FrameContext>();
 
-  const [added, setAdded] = useState(false);
-
-  const [addFrameResult, setAddFrameResult] = useState("");
-
-  const addFrame = useCallback(async () => {
-    try {
-      await sdk.actions.addFrame();
-    } catch (error) {
-      if (error instanceof AddFrame.RejectedByUser) {
-        setAddFrameResult(`Not added: ${error.message}`);
-      }
-
-      if (error instanceof AddFrame.InvalidDomainManifest) {
-        setAddFrameResult(`Not added: ${error.message}`);
-      }
-
-      setAddFrameResult(`Error: ${error}`);
-    }
-  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -70,12 +51,9 @@ export default function Frame() {
       }
 
       setContext(context);
-      setAdded(context.client.added);
-
-      // If frame isn't already added, prompt user to add it
-      if (!context.client.added) {
-        addFrame();
-      }
+      
+      // Automatically redirect to website
+      sdk.actions.openUrl("https://wirewatch.xyz");
 
       sdk.on("frameAdded", ({ notificationDetails }) => {
         setAdded(true);
